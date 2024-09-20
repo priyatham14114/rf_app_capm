@@ -1,0 +1,1 @@
+using RF_app_service as service from '../../srv/cat-service';
