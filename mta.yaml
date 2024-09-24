@@ -3,135 +3,137 @@ ID: rf_app_capm
 description: A simple CAP project.
 version: 1.0.0
 modules:
-- name: rf_app_capm-srv
-  type: nodejs
-  path: gen/srv
-  requires:
-  - name: rf_app_capm-auth
-  - name: rf_app_capm-destination-service
-  - name: rf_app_capm-db
-  provides:
-  - name: srv-api
-    properties:
-      srv-url: ${default-url}
-  parameters:
-    buildpack: nodejs_buildpack
-    readiness-health-check-http-endpoint: /health
-    readiness-health-check-type: http
-  build-parameters:
-    builder: npm
-- name: rf_app_capm-app-deployer
-  type: com.sap.application.content
-  path: gen
-  requires:
-  - name: rf_app_capm-html5-repo-host
-    parameters:
-      content-target: true
-  build-parameters:
-    build-result: app/
+  - name: rf_app_capm-srv
+    type: nodejs
+    path: gen/srv
     requires:
-    - artifacts:
-      - comapprfapp.zip
-      name: comapprfapp
-      target-path: app//
-- name: rf_app_capm-destination-content
-  type: com.sap.application.content
-  requires:
-  - name: rf_app_capm-destination-service
+      - name: rf_app_capm-auth
+      - name: rf_app_capm-destination-service
+      - name: rf_app_capm-db
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
     parameters:
-      content-target: true
-  - name: rf_app_capm-html5-repo-host
+      buildpack: nodejs_buildpack
+      readiness-health-check-http-endpoint: /health
+      readiness-health-check-type: http
+    build-parameters:
+      builder: npm
+  - name: rf_app_capm-app-deployer
+    type: com.sap.application.content
+    path: gen
+    requires:
+      - name: rf_app_capm-html5-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: app/
+      requires:
+        - artifacts:
+            - comapprfapp.zip
+          name: comapprfapp
+          target-path: app//
+  - name: rf_app_capm-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: rf_app_capm-destination-service
+        parameters:
+          content-target: true
+      - name: rf_app_capm-html5-repo-host
+        parameters:
+          service-key:
+            name: rf_app_capm-html5-repo-host-key
+      - name: rf_app_capm-auth
+        parameters:
+          service-key:
+            name: rf_app_capm-auth-key
     parameters:
-      service-key:
-        name: rf_app_capm-html5-repo-host-key
-  - name: rf_app_capm-auth
-    parameters:
-      service-key:
-        name: rf_app_capm-auth-key
-  parameters:
-    content:
-      instance:
-        destinations:
-        - Name: rf_app_capm_rf_app_capm_html5_repo_host
-          ServiceInstanceName: rf_app_capm-html5-repo-host
-          ServiceKeyName: rf_app_capm-html5-repo-host-key
-          sap.cloud.service: rf_app_capm
-        - Authentication: OAuth2UserTokenExchange
-          Name: rf_app_capm_rf_app_capm_auth
-          ServiceInstanceName: rf_app_capm-auth
-          ServiceKeyName: rf_app_capm-auth-key
-          sap.cloud.service: rf_app_capm
-        existing_destinations_policy: ignore
-  build-parameters:
-    no-source: true
-- name: rf_app_capm-db-deployer
-  type: hdb
-  path: gen/db
-  requires:
-  - name: rf_app_capm-db
-  parameters:
-    buildpack: nodejs_buildpack
-- name: comapprfapp
-  type: html5
-  path: app/rf_app
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-resources:
-- name: rf_app_capm-auth
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      tenant-mode: dedicated
-      xsappname: rf_app_capm-${org}-${space}
-    path: ./xs-security.json
-    service: xsuaa
-    service-plan: application
-- name: rf_app_capm-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: true
-      init_data:
+      content:
         instance:
           destinations:
-          - Authentication: OAuth2UserTokenExchange
-            HTML5.DynamicDestination: true
-            HTML5.ForwardAuthToken: true
-            Name: rf_app_capm-srv-api
-            ProxyType: Internet
-            Type: HTTP
-            URL: ~{srv-api/srv-url}
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
-          existing_destinations_policy: update
-    service: destination
-    service-plan: lite
-  requires:
-  - name: srv-api
-- name: rf_app_capm-html5-repo-host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-plan: app-host
-- name: rf_app_capm-db
-  type: com.sap.xs.hdi-container
-  parameters:
-    service: hana
-    service-plan: hdi-shared
+            - Name: rf_app_capm_rf_app_capm_html5_repo_host
+              ServiceInstanceName: rf_app_capm-html5-repo-host
+              ServiceKeyName: rf_app_capm-html5-repo-host-key
+              sap.cloud.service: rf_app_capm
+            - Authentication: OAuth2UserTokenExchange
+              Name: rf_app_capm_rf_app_capm_auth
+              ServiceInstanceName: rf_app_capm-auth
+              ServiceKeyName: rf_app_capm-auth-key
+              sap.cloud.service: rf_app_capm
+          existing_destinations_policy: ignore
+    build-parameters:
+      no-source: true
+  - name: rf_app_capm-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: rf_app_capm-db
+    parameters:
+      buildpack: nodejs_buildpack
+  - name: comapprfapp
+    type: html5
+    path: app/rf_app
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+        - npm ci
+      supported-platforms:
+        []
+resources:
+  - name: rf_app_capm-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        tenant-mode: dedicated
+        xsappname: rf_app_capm-${org}-${space}
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+  - name: rf_app_capm-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: OAuth2UserTokenExchange
+                HTML5.DynamicDestination: true
+                HTML5.ForwardAuthToken: true
+                Name: rf_app_capm-srv-api
+                ProxyType: Internet
+                Type: HTTP
+                URL: ~{srv-api/srv-url}
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+      service: destination
+      service-plan: lite
+    requires:
+      - name: srv-api
+  - name: rf_app_capm-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: rf_app_capm-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-  - builder: custom
-    commands:
-    - npm ci
-    - npx cds build --production
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production

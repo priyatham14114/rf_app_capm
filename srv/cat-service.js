@@ -6,6 +6,7 @@ module.exports = cds.service.impl(async function () {
   // Read
   this.on("READ", "RESOURCESSet", getData); 
   this.on("READ", "ProcessAreaSet", getData);
+  this.on("READ", "ServiceSet", getData);
 
   // Resource CUD operations
   this.on("CREATE", "RESOURCESSet", createResourceData);

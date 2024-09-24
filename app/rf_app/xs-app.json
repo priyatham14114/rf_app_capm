@@ -3,6 +3,23 @@
   "authenticationMethod": "route",
   "routes": [
     {
+      "source": "^/srv/(.*)$",
+      "target": "$1",
+      "destination": "srv-api",
+      "csrfProtection": true
+    },
+    {
+      "source": "^/?odata/(.*)$",
+      "target": "/odata/$1",
+      "destination": "srv-api",
+      "csrfProtection": true
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt"
+    },
+    {
       "source": "^/RF_App_Service/(.*)$",
       "target": "/RF_App_Service/$1",
       "destination": "rf_app_capm-srv-api",

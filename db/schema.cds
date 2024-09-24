@@ -9,6 +9,16 @@ using {rf_App_Srvc} from '../srv/external/rf_App_Srvc';
 //     Height
 
 //   };
+entity C_ServiceSet {
+  key Client       : String;
+      Description  : String;
+      DescriptionB : String;
+      SystemId     : String;
+      InstanceNo   : String;
+      AppServer    : String;
+      SapRouterStr : String;
+      SapService   : String;
+}
 
 entity RESOURCESSet   as
   projection on rf_App_Srvc.RESOURCESSet {

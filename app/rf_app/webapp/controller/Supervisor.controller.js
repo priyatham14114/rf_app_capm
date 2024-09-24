@@ -16,7 +16,7 @@ sap.ui.define(
                 this.bCreate = true;
                 var oModel = new JSONModel(sap.ui.require.toUrl("com/app/rfapp/model/data1.json"));
                 this.getView().setModel(oModel);
-                var oModelV2 = this.getOwnerComponent().getModel();
+                var oModelV2 = this.getOwnerComponent().getModel("ModelV2");
                 this.getView().byId("pageContainer").setModel(oModelV2);
                 //this._updateComboBoxItems();
                 this._fetchUniqueProcessAreas();
@@ -344,7 +344,7 @@ sap.ui.define(
                 oView.byId("idRoesurcetypeInputF").setText(oSelectedResource.Resourcetype)
 
 
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.read("/ProcessAreaSet", {
                     success: function (oData) {
                         var aProcessAreas = oData.results;
@@ -549,7 +549,7 @@ sap.ui.define(
                     Status: "true",
                     Loginfirst: true
                 };
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.update(`/RESOURCESSet('${Empid}')`, oData, {
                     success: function () {
                         sap.m.MessageToast.show("Password updated successfully!");
@@ -568,7 +568,7 @@ sap.ui.define(
             },
             _updateComboBoxItems: function () {
                 var oComboBox = this.byId("_IDGenComboBox1");
-                var oModel = this.getView().getModel();
+                var oModel = this.getView().getModel("ModelV2");
                 var aItems = oModel.getProperty("/ProcessAreaSet");
 
                 // Create a set to track unique keys
@@ -593,7 +593,7 @@ sap.ui.define(
             },
 
             _fetchUniqueProcessAreas: function () {
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.read("/ProcessAreaSet", {
                     success: function (oData) {
                         var aProcessAreas = oData.results;
@@ -665,7 +665,7 @@ sap.ui.define(
                 // Get the Group MultiComboBox and apply the filters
                 var oGroupMultiComboBox = this.byId("GroupSelect");
                 // Fetch data from the model with applied filters
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.read("/ProcessAreaSet", {
                     filters: [oCombinedFilter],
                     success: function (oData) {
@@ -723,7 +723,7 @@ sap.ui.define(
                 var sResourceId = oSelectedResource.Resourceid; // Assuming Resourceid is the key
 
                 // Get the OData model
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
 
                 // Delete the selected record
                 oModel.remove("/RESOURCESSet('" + sResourceId + "')", {
@@ -775,7 +775,7 @@ sap.ui.define(
                 });
 
                 // Fetch data from the model with applied filters
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.read("/ProcessAreaSet", {
                     filters: [oCombinedFilter],
                     success: function (oData) {
@@ -887,7 +887,7 @@ sap.ui.define(
                 });
 
                 // Fetch data from the model with applied filters
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.read("/ProcessAreaSet", {
                     filters: [oCombinedFilter],
                     success: function (oData) {
@@ -1098,7 +1098,7 @@ sap.ui.define(
                     Status: "true",
                     Loginfirst: true
                 };
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 if (!this.bCreate) {
                     oModel.update(`/RESOURCESSet('${Empid}')`, oData, {
                         success: function () {
@@ -1177,7 +1177,7 @@ sap.ui.define(
                 debugger
                 var oInput = oEvent.getSource();
                 var Empid = oInput.getValue();
-                var oModel = this.getOwnerComponent().getModel();  // Assumes you have set the model to your view
+                var oModel = this.getOwnerComponent().getModel("ModelV2");  // Assumes you have set the model to your view
 
                 // Check if the Employee ID is exactly 6 characters long
                 if (Empid.length !== 6) {
@@ -1275,7 +1275,7 @@ sap.ui.define(
                 // Get the Group MultiComboBox and apply the filters
                 var oGroupMultiComboBox = this.byId("idGroupSelect");
                 // Fetch data from the model with applied filters
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.read("/ProcessAreaSet", {
                     filters: [oCombinedFilter],
                     success: function (oData) {
@@ -1346,7 +1346,7 @@ sap.ui.define(
                 });
 
                 // Fetch data from the model with applied filters
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.read("/ProcessAreaSet", {
                     filters: [oCombinedFilter],
                     success: function (oData) {
@@ -1456,7 +1456,7 @@ sap.ui.define(
                 });
 
                 // Fetch data from the model with applied filters
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 oModel.read("/ProcessAreaSet", {
                     filters: [oCombinedFilter],
                     success: function (oData) {
@@ -1667,9 +1667,19 @@ sap.ui.define(
                 oRouter.navTo("AdhocProductWt");
 
             },
+            OnPressUnloadByDelivery: function () {
+                var oRouter = UIComponent.getRouterFor(this);
+                oRouter.navTo("UnloadByDelivery", { id: this.ID });
+
+            },
             onPressCreateAdhocProductWTInAdhocWT: function () {
                 var oRouter = UIComponent.getRouterFor(this);
                 oRouter.navTo("AdhocProductWt");
+
+            },
+            OnPressUnloadByDelivery: function () {
+                var oRouter = UIComponent.getRouterFor(this);
+                oRouter.navTo("UnloadByDelivery", { id: this.ID });
 
             },
             OnPressCreateandConfirmAdhocHUWT: function () {

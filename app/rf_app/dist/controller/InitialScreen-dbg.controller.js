@@ -27,7 +27,7 @@ sap.ui.define([
                 name: "com.app.rfapp.fragments.ConnecttoSAP"
             })
             this.oConnetSap.open();
-            
+
             this.getView().byId("idconnectsapeditButton").setVisible(false);
             this.getView().byId("idconnectsapfinishButton").setVisible(true);
         },
@@ -43,13 +43,67 @@ sap.ui.define([
             if (oU === "111010" && oP === "ARTIHCUS") {
                 this.getOwnerComponent().getRouter().navTo("Homepage", { id: oU })
             }
-            
+
         },
         onUserLogin: function () {
             this.getView().byId("idsaplogonUserId").setValue();
             this.getView().byId("idSapLogonPassword").setValue();
         },
         onFinishconnectSAPPress: function () {
+
+            var oView = this.getView();
+            var sDescription = oView.byId("idDescriptionInput").getValue();
+            var sSystemId = oView.byId("idSystemIdInput").getValue();
+            var sInstanceNumber = oView.byId("idInstanceNumberInput").getValue();
+            var sClient = oView.byId("idClientInput").getValue();
+            var sApplicationServer = oView.byId("idApplicationServerInput").getValue();
+            var sRouterString = oView.byId("idRouterStringInput").getValue();
+            var sService = oView.byId("idServiceInput").getValue();
+            var oCheckbox = oView.byId("idCheckboxDescription");
+
+            var oPayload = {
+                Description: sDescription,
+                SystemId: sSystemId,
+                InstanceNo: sInstanceNumber,
+                Client: sClient,
+                AppServer: sApplicationServer,
+                SapRouterStr: sRouterString,
+                SapService: sService,
+                DescriptionB: (oCheckbox.getSelected() ? (sSystemId + " / " + sClient) : sDescription)
+                // Add other properties as needed based on your OData service structure
+            };
+
+            // Save to OData service
+            // last
+            const oModel = oView.getModel(),
+                oBinding = oModel.bindList("/C_ServiceSet");
+
+            try {
+                const newRecord = oBinding.create(oPayload);
+                newRecord.created()
+                    .then(function (oData,resp) {
+                        MessageToast.show("Created successfully");
+                    })
+                    .catch(async function (oError) {
+                        MessageToast.show("Creation failed");
+                        console.error("Error during creation:", oError);
+                    });
+            } catch (err) {
+                console.error("Error while calling create:", err);
+            }
+
+
+
+
+            // if (newRecord) {
+            //     MessageToast.show("created")
+            // } else {
+            //     MessageToast.show("Failed")
+            // }
+
+
+        },
+        onFinishconnectSAPPresss: function () {
             // Get the dialog and its input fields
             var oView = this.getView();
             var sDescription = oView.byId("idDescriptionInput").getValue();
@@ -135,7 +189,7 @@ sap.ui.define([
             var oModel = this.getView().getModel("ModelV2");
 
             // Read existing entries to check uniqueness
-            oModel.read("/ServiceSet", {
+            oModel.read("/C_ServiceSet", {
                 filters: [new sap.ui.model.Filter("Description", sap.ui.model.FilterOperator.EQ, sDescription)],
                 filters: [new sap.ui.model.Filter("Client", sap.ui.model.FilterOperator.EQ, sClient)],
                 filters: [new sap.ui.model.Filter("SapService", sap.ui.model.FilterOperator.EQ, sService)],
@@ -203,7 +257,7 @@ sap.ui.define([
                     };
 
                     // Save to OData service
-                    oModel.create("/ServiceSet", oEntry, {
+                    oModel.create("/C_ServiceSet", oEntry, {
                         success: function () {
                             MessageToast.show("Configured system saved successfully.");
                             this.clearInputFields(oView);
@@ -216,6 +270,7 @@ sap.ui.define([
 
                             // Insert the new button after the link
                             oHomePage.insertItem(oNewButton, oHomePage.indexOfItem(oLink) + 1);
+                            oModel.refresh()
                         }.bind(this), // Ensure 'this' context is correct
                         error: function (oError) {
                             MessageToast.show("Error saving configured system.");
@@ -248,7 +303,7 @@ sap.ui.define([
         loadConfiguredSystems: function () {
             var oModel = this.getOwnerComponent().getModel("ModelV2"); // Get the OData model
 
-            oModel.read("/ServiceSet", {
+            oModel.read("/C_ServiceSet", {
                 success: function (oData) {
                     var aConfiguredSystems = oData.results; // Assuming results is an array of configured systems
 
@@ -317,7 +372,7 @@ sap.ui.define([
                     if (status === MessageBox.Action.DELETE) {
                         // Delete from OData service
                         var oModel = that.getView().getModel("ModelV2"); // Get the OData model
-                        var sPath = "/ServiceSet('" + this.client + "')"; // Construct path based on your entity set
+                        var sPath = "/C_ServiceSet('" + this.client + "')"; // Construct path based on your entity set
 
                         oModel.remove(sPath, {
                             success: function () {
@@ -355,7 +410,7 @@ sap.ui.define([
 
             var that = this;
 
-            oModel.read("/ServiceSet", {
+            oModel.read("/C_ServiceSet", {
                 filters: [new sap.ui.model.Filter("DescriptionB", sap.ui.model.FilterOperator.EQ, oButtonText)],
                 success: function (oData) {
 
@@ -388,7 +443,7 @@ sap.ui.define([
             var sService = oView.byId("idServiceInput").getValue();
             var oCheckbox = oView.byId("idCheckboxDescription");
             var oButton = this.selectedButton;
-        
+
             // Perform validation checks
             if (!sSystemId) {
                 sap.m.MessageToast.show("System ID is required.");
@@ -410,15 +465,15 @@ sap.ui.define([
                 sap.m.MessageToast.show("Service is required.");
                 return;
             }
-        
+
             // Update the sDescription based on the checkbox state
             if (oCheckbox.getSelected()) {
                 sDescription = sSystemId + " / " + sClient;
             }
-        
+
             // Update button text
             oButton.setText(sDescription);
-        
+
             // Create an object with updated values, setting both Description and DescriptionB
             var oUpdatedData = {
                 Description: sDescription,
@@ -430,12 +485,12 @@ sap.ui.define([
                 SapRouterStr: sRouterString,
                 SapService: sService
             };
-        
+
             var that = this;
             var oModel = this.getView().getModel("ModelV2");
-        
+
             // Update the entry in OData service
-            oModel.update("/ServiceSet('" + sClient + "')", oUpdatedData, {
+            oModel.update("/C_ServiceSet('" + sClient + "')", oUpdatedData, {
                 success: function () {
                     sap.m.MessageToast.show("Data updated successfully.");
                     that.clearInputFields(oView);
@@ -446,10 +501,10 @@ sap.ui.define([
                 }
             });
         },
-        onBackconnectSAPPress:function(){
+        onBackconnectSAPPress: function () {
             this.onCloseconnectsap();
         },
-        
-        
+
+
     })
 });

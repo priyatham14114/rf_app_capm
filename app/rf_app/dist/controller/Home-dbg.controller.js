@@ -41,7 +41,7 @@ sap.ui.define([
                 // }
 
                 // Get the model from the component
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 var that = this;
 
                 try {
@@ -337,7 +337,7 @@ sap.ui.define([
                 }
 
                 // Create the resource
-                var oModel = this.getView().getModel();
+                var oModel = this.getView().getModel("ModelV2");
                 var that = this;
                 oModel.read("/RESOURCESSet('" + oResourceId + "')", {
                     success: function (oData) {
@@ -448,7 +448,7 @@ sap.ui.define([
                 };
 
                 // Get the model from the component
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
 
                 // Update the user's password in the backend
                 try {
@@ -482,7 +482,7 @@ sap.ui.define([
                     sap.m.MessageToast.show("Please enter your mobile number.");
                     return;
                 }
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
                 // Call the OData service to check if the record exists
                 oModel.read("/RESOURCESSet?$filter=Phonenumber eq '" + mobileNo + "'", {
                     success: function (data) {
@@ -613,7 +613,7 @@ sap.ui.define([
                     return;
                 }
                 // Get the model from the component
-                var oModel = this.getOwnerComponent().getModel();
+                var oModel = this.getOwnerComponent().getModel("ModelV2");
 
                 var oDataUpdate = {
                     Password: sNewPassword
