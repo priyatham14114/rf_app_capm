@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(t){"use strict";return t.extend("com.app.rfapp.controller.DeconsAuto",{onInit:function(){const t=this.getOwnerComponent().getRouter();t.attachRoutePatternMatched(this.onResourceDetailsLoad,this)},onResourceDetailsLoad:async function(t){const{id:e}=t.getParameter("arguments");this.ID=e}})});
+//# sourceMappingURL=DeconsAuto.controller.js.map

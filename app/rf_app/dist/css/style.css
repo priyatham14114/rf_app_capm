@@ -59,20 +59,70 @@
 .sapUiSmallMargin {
     border: 1cm;
 }
+.titleWithBorder {
+    border: 2px solid orange;  /* Add border */
+    padding: 10px;             /* Add padding for spacing */
+    background-color: white;   /* Background color to make it stand out */
+    width: auto;               /* Fit content */
+}
+.customHeader_SSC {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333; /* Adjust as needed */
+}
 
-.boxContainer {
-    border-radius: 1rem !important;
-    border: 2px solid #ed731dd2 !important;
-    /* Add border width, style, and color */
-    padding: auto !important; 
-    width: 25% !important;
+
+.buttonContainer {
+    border-radius: 0rem !important;
+    margin-top: 20px; /* Optional: add some spacing between buttons */
+    background-color: black;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+}
+ 
+.capModelRFTextdialog {
+    color: #ed731dd2 !important;
+}
+.dialogButton {
+    background-color: black !important; /* Set button background color to black */
+    border-color: black !important; /* Set button border color to black */
+    border-radius: 12px !important; /* Adjusted for more pronounced curve */
+    color: white !important; /* Set button text color to white */
+    padding: 8px 16px; /* Optional: Add padding for better button size */
+    border: 1px solid transparent; /* Ensure border is transparent to maintain the look */
 }
 .boxContainer3 {
     border-radius: 1rem !important;
-    border: 2px solid #090909d2 !important;
+     border: 2px solid #090909d2 !important;
     /* Add border width, style, and color */
+    padding: 2rem !important;
+    width: 40% !important;
+}
+.boxContainer {
+    border-radius: 0rem !important;
+    border: 2px solid #ed731dd2 !important;
     padding: auto !important; 
-    width: 25% !important;
+    padding-bottom: 1rem;
+    width: 23% !important;
+}
+.TitlecustomHeader{
+    border-radius: 0rem !important;
+    border: 2px solid #ed731dd2 !important;
+}
+.InitialButton67{
+    margin-left: 0.5rem;
+    font-size: x-small;
+    margin-bottom: 0.3rem !important;
+}
+.Butns{
+    margin-left: 0.3rem;
+}
+.boxContainersupervisor {
+    border-radius: 1rem !important;
+     border: 2px solid #090909d2 !important; 
+    /* Add border width, style, and color */
+    padding: 2rem !important; 
+    width: 40% !important;
 }
 .boxContainer2 {
     border-bottom: 2px solid #ed731dd2 !important;
@@ -81,11 +131,20 @@
     width: auto !important;
     /* padding-bottom: 4rem; */
 }
+.checkBoxText .sapMCbLabel {
+    font-weight: bold; /* Make the checkbox label text bold */
+    color: #333;
+}
+
 .capModelRFText {
     color: #ed731dd2 !important;
     margin-top: 25px !important; /* Adjust margin to position it below the title */
     font-size: 1em !important; /* Optional: adjust font size */
     margin-left: 30px !important;
+}
+.capModelRFTextdialog {
+     color: #ed731dd2 !important;
+     margin-left: 45px !important;
 }
 .button{
     margin-left:20% !important;
@@ -96,7 +155,26 @@
 .button2{
     margin-left:60% !important;
 }
+.sapMDialog {
+    color: white; /* Set text color for better visibility */
+}
 
+.buttonContainer {
+    margin-top: 20px; /* Optional: add some spacing between buttons */
+    background-color: black;
+    margin-left: 1.7rem;
+    margin-right: 2.5rem;
+    margin-bottom: 0.5rem;
+ 
+}
+.dialogButton {
+    background-color: black !important; /* Set button background color to black */
+    border-radius: 12px !important; /* Adjusted for more pronounced curve */
+    color: white !important; /* Set button text color to white */
+}
+.DynamicBtn{
+    height: 4rem !important;
+}
 .Inputs {
     width: 100%
 }
@@ -111,12 +189,12 @@
 }
 @media (max-width: 600px) {
     .boxContainer {
-        width: 90% !important; /* Full width on mobile */
-        padding: 1rem; /* Adjust padding */
+        width:  85%!important; /* Full width on mobile */
+        padding: auto !important; /* Adjust padding */
     }
     .boxContainer3 {
-        width: 90% !important; /* Full width on mobile */
-        padding: 1rem; /* Adjust padding */
+        width: auto !important; /* Full width on mobile */
+        padding: auto !important; /* Adjust padding */
     }
     .boxContainer2 {
         border-bottom: 2px solid #ed731dd2 !important;
@@ -137,8 +215,8 @@
     }
 
     .logo {
-        margin-top: 5%; /* Adjust logo margin for mobile */
-        margin-left: 0; /* Center logo on mobile */
+        margin-top: 12%; /* Adjust logo margin for mobile */
+        margin-left: 12%; /* Center logo on mobile */
         width: 100%; /* Logo full width on mobile */
         height: auto; /* Maintain aspect ratio */
     }
@@ -212,7 +290,7 @@
 
 /*-----------------------------Reciving Of Hu by ASN   Start----------------------------------*/
 .ScanHumargin {
-    margin-top: 12%;
+    margin-top: 20%;
     margin-right: 2000% !important;
 }
 
@@ -377,12 +455,19 @@
         width: auto;
     }
 }
-
-.centeredForm {
-    width: 50%; /* Default width for larger screens */
-    margin: auto;
-    position: relative;
+/* CSS methods for ARHUI(Automatically RepackHUItem) Tile in that Page 2 & Page 3... */
+@media (max-width: 768px) {
+    .autoRepackPage {
+        flex-direction: column; /* Stack vertically */
+        align-items: flex-start;
+    }
+    .autoRepackPage .sapMLabel {
+        width: auto !important; /* Adjust labels */
+    }
 }
+
+
+
 
 
 
@@ -436,4 +521,5 @@ background-color: rgb(9, 8, 8) !important;
 .sapUiResponsivePadding .sapUiTinyMarginEnd {
     margin-right: 5px;
 }
+
 

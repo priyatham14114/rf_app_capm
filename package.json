@@ -12,7 +12,9 @@
     "@sap/cds": "^8",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
     "@sap/xssec": "^4",
-    "express": "^4"
+    "express": "^4",
+    "install": "^0.13.0",
+    "npm": "^10.8.3"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.6",
@@ -39,17 +41,11 @@
         "csrf": true,
         "csrfInBatch": true,
         "credentials": {
-          "[development]": {
-            "url": "https://vhcalakeci.artihcus.com:44306/sap/opu/odata/sap/ZEWM_RFUI_SRV_01"
+          "[production]": {
+            "url": "https://vhcalakeci.artihcus.com:44306/sap/opu/odata/sap/ZEWM_RFUI_SRV_01",
           }
         }
       }
-    },
-    "hana": {
-      "deploy-format": "hdbtable"
-    },
-    "sql": {
-      "native_hana_associations": false
     }
   }
 }

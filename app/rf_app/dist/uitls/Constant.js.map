@@ -1,0 +1,1 @@
+{"version":3,"file":"Constant.js","names":["sap","ui","define","oAccountSID","oAuthToken","oServiceID"],"sources":["Constant-dbg.js"],"mappings":"AAAAA,IAAIC,GAAGC,OACH,GACA,WACE,aAGD,MAAO,CACJC,YAAY,qCACZC,WAAW,mCACXC,WAAW,qCAEf","ignoreList":[]}

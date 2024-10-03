@@ -130,7 +130,7 @@
         },
         {
           "name": "Homepage",
-          "pattern": "Homepage/{id}",
+          "pattern": "Homepage",
           "target": [
             "TargetHome"
           ]
@@ -234,6 +234,13 @@
           ]
         },
         {
+          "name": "ManuallyRepackingByHUItem",
+          "pattern": "ManuallyRepackingByHUItem/{id}",
+          "target": [
+            "TargetManuallyRepackingByHUItem"
+          ]
+        },
+        {
           "name": "RouteBillofLading",
           "pattern": "BillofLading/{id}",
           "target": [
@@ -245,6 +252,13 @@
           "pattern": "RecevingOfHUbyDelivery/{id}",
           "target": [
             "TargetRecevingOfHUbyDelivery"
+          ]
+        },
+        {
+          "name": "ReversalofConsumptionbyMObyHU",
+          "pattern": "ReversalofConsumptionbyMObyHU/{id}",
+          "target": [
+            "TargetReversalofConsumptionbyMObyHU"
           ]
         },
         {
@@ -322,6 +336,13 @@
           "pattern": "AutomaticallyRepackHUItem/{id}",
           "target": [
             "TargetAutomaticallyRepackHUItem"
+          ]
+        },
+        {
+          "name": "SetReadyforWHProcessingByCO",
+          "pattern": "SetReadyforWHProcessingByCO/{id}",
+          "target": [
+            "TargetSetReadyforWHProcessingByCO"
           ]
         },
         {
@@ -437,10 +458,24 @@
           ]
         },
         {
+          "name": "PickPoint",
+          "pattern": "PickPoint/{id}",
+          "target": [
+            "TargetPickPoint"
+          ]
+        },
+        {
           "name": "ManuallyRepackAllHUItems",
           "pattern": "ManuallyRepackAllHUItems/{id}",
           "target": [
             "TargetManuallyRepackAllHUItems"
+          ]
+        },
+        {
+          "name": "LoadbyHUManPosAssiognment",
+          "pattern": "LoadbyHUManPosAssiognment/{id}",
+          "target": [
+            "TargetLoadbyHUManPosAssiognment"
           ]
         },
         {
@@ -451,10 +486,24 @@
           ]
         },
         {
+          "name": "DeconsAuto",
+          "pattern": "DeconsAuto/{id}",
+          "target": [
+            "TargetDeconsAuto"
+          ]
+        },
+        {
           "name": "CreatePutawayHusforDeconsolidate",
           "pattern": "CreatePutawayHusforDeconsolidate/{id}",
           "target": [
             "TargetCreatePutawayHusforDeconsolidate"
+          ]
+        },
+        {
+          "name": "HUStockOverviewQuery",
+          "pattern": "HUStockOverviewQuery/{id}",
+          "target": [
+            "TargetHUStockOverviewQuery"
           ]
         },
         {
@@ -472,10 +521,73 @@
           ]
         },
         {
+          "name": "HuMaintanaceInDeconsolidation",
+          "pattern": "HuMaintanaceInDeconsolidation/{id}",
+          "target": [
+            "TargetHuMaintanaceInDeconsolidation"
+          ]
+        },
+        {
           "name": "ProductInspectionByStorageBin",
           "pattern": "ProductInspectionByStorageBin/{id}",
           "target": [
             "TargetProductInspectionByStorageBin"
+          ]
+        },
+        {
+          "name": "ConsumptionByManufacturingOrder",
+          "pattern": "ConsumptionByManufacturingOrder/{id}",
+          "target": [
+            "TargetConsumptionByManufacturingOrder"
+          ]
+        },
+        {
+          "name": "RoutePutawayHuClustered",
+          "pattern": "RoutePutawayHuClustered/{id}",
+          "target": [
+            "TargetRoutePutawayHuClustered"
+          ]
+        },
+        {
+          "name": "WHProcessingByBOL",
+          "pattern": "WHProcessingByBOL/{id}",
+          "target": [
+            "TargetWHProcessingByBOL"
+          ]
+        },
+        {
+          "name": "UnloadByHu",
+          "pattern": "UnloadByHu/{id}",
+          "target": [
+            "TargetUnloadByHu"
+          ]
+        },
+        {
+          "name": "RouteReversalofConsumptionbyMO_Bin",
+          "pattern": "ReversalofConsumptionbyMO_Bin/{id}",
+          "target": [
+            "TargetReversalofConsumptionbyMO_Bin"
+          ]
+        },
+        {
+          "name": "AutomaticallyRepackHu",
+          "pattern": "AutomaticallyRepackHu/{id}",
+          "target": [
+            "TargetAutomaticallyRepackHu"
+          ]
+        },
+        {
+          "name": "LoadbyHUAutoPosAssiognment",
+          "pattern": "LoadbyHUAutoPosAssiognment/{id}",
+          "target": [
+            "TargetLoadbyHUAutoPosAssiognment"
+          ]
+        },
+        {
+          "name": "RouteChangeLoadingUnloadingDetails",
+          "pattern": "RouteChangeLoadingUnloadingDetails/{id}",
+          "target": [
+            "TargetRouteChangeLoadingUnloadingDetails"
           ]
         }
       ],
@@ -641,6 +753,20 @@
           "viewId": "AutomaticallyRepackHUItem",
           "viewName": "AutomaticallyRepackHUItem"
         },
+        "TargetSetReadyforWHProcessingByCO": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "SetReadyforWHProcessingByCO",
+          "viewName": "SetReadyforWHProcessingByCO"
+        },
+        "TargetReversalofConsumptionbyMObyHU": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ReversalofConsumptionbyMObyHU",
+          "viewName": "ReversalofConsumptionbyMObyHU"
+        },
         "TargetBillofLading": {
           "viewType": "XML",
           "transition": "slide",
@@ -767,19 +893,26 @@
           "viewId": "RecevingOfHUbyTUorDoor",
           "viewName": "RecevingOfHUbyTUorDoor"
         },
-        "TargetWTQueryByQueue": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "WTQueryByQueue",
-          "viewName": "WTQueryByQueue"
-        },
         "TargetSerialNumberLocation": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
           "viewId": "SerialNumberLocation",
           "viewName": "SerialNumberLocation"
+        },
+        "TargetManuallyRepackingByHUItem": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ManuallyRepackingByHUItem",
+          "viewName": "ManuallyRepackingByHUItem"
+        },
+        "TargetWTQueryByQueue": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "WTQueryByQueue",
+          "viewName": "WTQueryByQueue"
         },
         "TargetWTQueryByWT": {
           "viewType": "XML",
@@ -802,6 +935,27 @@
           "viewId": "CreateShippingHUWOWC",
           "viewName": "CreateShippingHUWOWC"
         },
+        "TargetDeconsAuto": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "DeconsAuto",
+          "viewName": "DeconsAuto"
+        },
+        "TargetPickPoint": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "PickPoint",
+          "viewName": "PickPoint"
+        },
+        "TargetHUStockOverviewQuery": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "HUStockOverviewQuery",
+          "viewName": "HUStockOverviewQuery"
+        },
         "TargetCreatePutawayHusforDeconsolidate": {
           "viewType": "XML",
           "transition": "slide",
@@ -823,6 +977,13 @@
           "viewId": "ProductInspectionByHU",
           "viewName": "ProductInspectionByHU"
         },
+        "TargetHuMaintanaceInDeconsolidation": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "HuMaintanaceInDeconsolidation",
+          "viewName": "HuMaintanaceInDeconsolidation"
+        },
         "TargetProductInspectionByStorageBin": {
           "viewType": "XML",
           "transition": "slide",
@@ -836,6 +997,69 @@
           "clearControlAggregation": false,
           "viewId": "UnloadingByBillofLading",
           "viewName": "UnloadingByBillofLading"
+        },
+        "TargetLoadbyHUManPosAssiognment": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "LoadbyHUManPosAssiognment",
+          "viewName": "LoadbyHUManPosAssiognment"
+        },
+        "TargetLoadbyHUAutoPosAssiognment": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "LoadbyHUAutoPosAssiognment",
+          "viewName": "LoadbyHUAutoPosAssiognment"
+        },
+        "TargetRoutePutawayHuClustered": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "PutawayByHuc",
+          "viewName": "PutawayByHuc"
+        },
+        "TargetRouteChangeLoadingUnloadingDetails": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ChangeLoadingUnloadingDetails",
+          "viewName": "ChangeLoadingUnloadingDetails"
+        },
+        "TargetWHProcessingByBOL": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "WHProcessingByBOL",
+          "viewName": "WHProcessingByBOL"
+        },
+        "TargetUnloadByHu": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "UnloadByHu",
+          "viewName": "UnloadByHu"
+        },
+        "TargetConsumptionByManufacturingOrder": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ConsumptionByManufacturingOrder",
+          "viewName": "ConsumptionByManufacturingOrder"
+        },
+        "TargetReversalofConsumptionbyMO_Bin": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ReversalofConsumptionbyMO_Bin",
+          "viewName": "ReversalofConsumptionbyMO_Bin"
+        },
+        "TargetAutomaticallyRepackHu": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "AutomaticallyRepackHu",
+          "viewName": "AutomaticallyRepackHu"
         }
       }
     },

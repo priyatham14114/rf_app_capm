@@ -1,10 +1,23 @@
 const cds = require("@sap/cds");
-const { getData, deleteResourceData, createResourceData, updateResourceData} = require("./src/operations");
+const { 
+  getData,
+  
+  createResourceData,
+  updateResourceData,
+  deleteResourceData,
+
+  createProcessAreaData,
+  updateProcessAreaData,
+  deleteProcessAreaData,
+
+  createServiceSetData,
+  updateServiceSetData,
+  deleteServiceSetData } = require("./src/operations");
 
 module.exports = cds.service.impl(async function () {
 
   // Read
-  this.on("READ", "RESOURCESSet", getData); 
+  this.on("READ", "RESOURCESSet", getData);
   this.on("READ", "ProcessAreaSet", getData);
   this.on("READ", "ServiceSet", getData);
 
@@ -13,9 +26,14 @@ module.exports = cds.service.impl(async function () {
   this.on("PUT", "RESOURCESSet", updateResourceData);
   this.on("DELETE", "RESOURCESSet", deleteResourceData);
 
-  // Process area CUD operations
-  // this.on("CREATE", "ProcessAreaSet", createProcessAreaData);
-  // this.on("PUT", "ProcessAreaSet", updateProcessAreaData);
+  // ServiceSet CUD operations
+  this.on("CREATE", "ServiceSet", createServiceSetData);
+  this.on("PUT", "ServiceSet", updateServiceSetData);
+  this.on("DELETE", "ServiceSet", deleteServiceSetData);
 
+  // ProcessArea CUD operations
+  this.on("CREATE", "ProcessArea", createProcessAreaData);
+  this.on("PUT", "ProcessArea", updateProcessAreaData);
+  this.on("DELETE", "ProcessArea", deleteProcessAreaData);
 
 })

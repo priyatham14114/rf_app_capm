@@ -3,28 +3,35 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^/srv/(.*)$",
-      "target": "$1",
-      "destination": "srv-api",
-      "csrfProtection": true
-    },
-    {
-      "source": "^/?odata/(.*)$",
-      "target": "/odata/$1",
-      "destination": "srv-api",
-      "csrfProtection": true
-    },
-    {
       "source": "^(.*)$",
       "target": "$1",
       "service": "html5-apps-repo-rt"
     },
     {
-      "source": "^/RF_App_Service/(.*)$",
-      "target": "/RF_App_Service/$1",
-      "destination": "rf_app_capm-srv-api",
+      "source": "^/?odata/(.*)$",
+      "target": "/odata/$1",
+      "destination": "srv-api",
       "authenticationType": "xsuaa",
-      "csrfProtection": false
+      "csrfProtection": true
+    },
+    {
+      "source": "^/sap/opu/odata/sap/ZEWM_RFUI_SRV_01/(.*)$",
+      "target": "/sap/opu/odata/sap/ZEWM_RFUI_SRV_01/$1",
+      "destination": "RF_PAP_CAPM_Destination",
+      "csrfProtection": true,
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/srv/(.*)$",
+      "target": "$1",
+      "destination": "srv-api",
+      "csrfProtection": true
     },
     {
       "source": "^/resources/(.*)$",
@@ -37,12 +44,6 @@
       "target": "/test-resources/$1",
       "authenticationType": "none",
       "destination": "ui5"
-    },
-    {
-      "source": "^(.*)$",
-      "target": "$1",
-      "service": "html5-apps-repo-rt",
-      "authenticationType": "xsuaa"
     }
   ]
 }

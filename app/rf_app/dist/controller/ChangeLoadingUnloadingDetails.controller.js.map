@@ -1,0 +1,1 @@
+{"version":3,"file":"ChangeLoadingUnloadingDetails.controller.js","names":["sap","ui","define","Controller","extend","onInit"],"sources":["ChangeLoadingUnloadingDetails-dbg.controller.js"],"mappings":"AAAAA,IAAIC,GAAGC,OACH,CACI,8BAEJ,SAASC,GACP,aAEA,OAAOA,EAAWC,OAAO,yDAA0D,CACjFC,OAAQ,WACR,GAEJ","ignoreList":[]}

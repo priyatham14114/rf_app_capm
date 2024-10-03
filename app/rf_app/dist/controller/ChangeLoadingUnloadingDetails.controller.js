@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(n){"use strict";return n.extend("com.app.rfapp.controller.ChangeLoadingUnloadingDetails",{onInit:function(){}})});
+//# sourceMappingURL=ChangeLoadingUnloadingDetails.controller.js.map
