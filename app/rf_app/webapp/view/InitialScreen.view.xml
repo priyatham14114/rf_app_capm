@@ -5,7 +5,7 @@
     xmlns="sap.m"
 >
     <Page id="pageInitial">
-    <Text text="With Destination"></Text>    
+    <Text text="With Destination today"></Text>    
         <content>
             <FlexBox
                 id="_IDGenFlexBoxInitial"

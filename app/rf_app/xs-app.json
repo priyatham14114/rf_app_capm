@@ -15,13 +15,6 @@
       "csrfProtection": true
     },
     {
-      "source": "^/sap/opu/odata/sap/ZEWM_RFUI_SRV_01/(.*)$",
-      "target": "/sap/opu/odata/sap/ZEWM_RFUI_SRV_01/$1",
-      "destination": "RF_PAP_CAPM_Destination",
-      "csrfProtection": true,
-      "authenticationType": "xsuaa"
-    },
-    {
       "source": "^(.*)$",
       "target": "$1",
       "service": "html5-apps-repo-rt",
